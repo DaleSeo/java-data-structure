@@ -14,18 +14,18 @@ public class SinglyLinkedListTest {
 	public void testAdd() {
 		SinglyLinkedList<String> list = new SinglyLinkedList<>();
 		System.out.println(list.toString());
-		assertEquals(0, list.getSize());
+		assertEquals(0, list.size());
 
 		list.add("A");
 
 		System.out.println(list.toString());
-		assertEquals(1, list.getSize());
+		assertEquals(1, list.size());
 
 		list.add("B");
 		list.add("C");
 
 		System.out.println(list.toString());
-		assertEquals(3, list.getSize());
+		assertEquals(3, list.size());
 	}
 
 	@Test
@@ -47,10 +47,10 @@ public class SinglyLinkedListTest {
 		}
 
 		assertEquals("C", list.remove(2));
-		assertEquals(2, list.getSize());
+		assertEquals(2, list.size());
 
 		assertEquals("A", list.remove(0));
-		assertEquals(1, list.getSize());
+		assertEquals(1, list.size());
 
 		try {
 			list.remove(1);
@@ -59,7 +59,7 @@ public class SinglyLinkedListTest {
 		}
 
 		assertEquals("B", list.remove(0));
-		assertEquals(0, list.getSize());
+		assertEquals(0, list.size());
 
 		try {
 			list.remove(0);
@@ -79,11 +79,11 @@ public class SinglyLinkedListTest {
 
 		list.insert(2, "D");
 		System.out.println(list);
-		assertEquals(4, list.getSize());
+		assertEquals(4, list.size());
 
 		list.insert(0, "E");
 		System.out.println(list);
-		assertEquals(5, list.getSize());
+		assertEquals(5, list.size());
 
 		try {
 			list.insert(5, "F");

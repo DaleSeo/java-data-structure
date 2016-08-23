@@ -1,9 +1,11 @@
 package seo.dale.datastructure.list.singly;
 
+import java.util.AbstractList;
+
 /**
  * @author Dale Seo
  */
-public class SinglyLinkedList<E> {
+public class SinglyLinkedList<E> extends AbstractList<E> {
 
 	private ListNode<E> head;
 	private int size;
@@ -21,6 +23,10 @@ public class SinglyLinkedList<E> {
 		node.setNext(new ListNode(data));
 		size++;
 		return true;
+	}
+
+	public void add(int index, E element ) {
+		// TODO: Implement this method
 	}
 
 	public E get(int index) {
@@ -62,7 +68,13 @@ public class SinglyLinkedList<E> {
 		return true;
 	}
 
-	public int getSize() {
+	public E set(int index, E element)
+	{
+		// TODO: Implement this method
+		return null;
+	}
+
+	public int size() {
 		return size;
 	}
 
