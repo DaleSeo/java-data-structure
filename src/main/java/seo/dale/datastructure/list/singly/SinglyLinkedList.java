@@ -15,18 +15,28 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 		size = 0;
 	}
 
-	public boolean add(E data) {
+	public boolean add(E element) {
 		ListNode<E> node = head;
 		for (int i = 0; i < size; i++) {
 			node = node.getNext();
 		}
-		node.setNext(new ListNode(data));
+		node.setNext(new ListNode(element));
 		size++;
 		return true;
 	}
 
 	public void add(int index, E element ) {
-		// TODO: Implement this method
+		verifyIndex(index);
+
+		ListNode<E> node = head;
+		for (int i = 0; i < index; i++) {
+			node = node.getNext();
+		}
+
+		ListNode<E> curr = new ListNode<>(element);
+		curr.setNext(node.getNext());
+		node.setNext(curr);
+		size++;
 	}
 
 	public E get(int index) {
@@ -51,21 +61,6 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 		prev.setNext(curr.getNext());
 		size--;
 		return curr.getData();
-	}
-
-	public boolean insert(int index, E data) {
-		verifyIndex(index);
-
-		ListNode<E> node = head;
-		for (int i = 0; i < index; i++) {
-			node = node.getNext();
-		}
-
-		ListNode<E> curr = new ListNode<>(data);
-		curr.setNext(node.getNext());
-		node.setNext(curr);
-		size++;
-		return true;
 	}
 
 	public E set(int index, E element)

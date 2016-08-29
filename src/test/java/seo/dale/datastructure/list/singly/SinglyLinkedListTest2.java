@@ -11,28 +11,26 @@ import static org.junit.Assert.fail;
  */
 public class SinglyLinkedListTest2 {
 
-	private static final int LONG_LIST_LENGTH =10;
+	private static final int LONG_LIST_LENGTH = 10;
 
-	private SinglyLinkedList<String> emptyList;
+	private SinglyLinkedList<Object> emptyList;
 	private SinglyLinkedList<String> shortList;
-	private SinglyLinkedList<Integer> longerList;
-	private SinglyLinkedList<Integer> list1;
+	private SinglyLinkedList<Integer> longList;
 
 	@Before
 	public void setUp() throws Exception {
 		emptyList = new SinglyLinkedList<>();
+
 		shortList = new SinglyLinkedList<>();
 		shortList.add("A");
 		shortList.add("B");
-		longerList = new SinglyLinkedList<>();
+		shortList.add("C");
+
+		longList = new SinglyLinkedList<>();
 		for (int i = 0; i < LONG_LIST_LENGTH; i++)
 		{
-			longerList.add(i);
+			longList.add(i);
 		}
-		list1 = new SinglyLinkedList<>();
-		list1.add(65);
-		list1.add(21);
-		list1.add(42);
 	}
 
 	@Test
@@ -57,7 +55,7 @@ public class SinglyLinkedListTest2 {
 
 		}
 		try {
-			shortList.get(2);
+			shortList.get(3);
 			fail("Check out of bounds");
 		}
 		catch (IndexOutOfBoundsException e) {
@@ -65,19 +63,19 @@ public class SinglyLinkedListTest2 {
 		}
 		// test longer list contents
 		for(int i = 0; i< LONG_LIST_LENGTH; i++ ) {
-			assertEquals("Check "+i+ " element", (Integer)i, longerList.get(i));
+			assertEquals("Check "+i+ " element", (Integer)i, longList.get(i));
 		}
 
 		// test off the end of the longer array
 		try {
-			longerList.get(-1);
+			longList.get(-1);
 			fail("Check out of bounds");
 		}
 		catch (IndexOutOfBoundsException e) {
 
 		}
 		try {
-			longerList.get(LONG_LIST_LENGTH);
+			longList.get(LONG_LIST_LENGTH);
 			fail("Check out of bounds");
 		}
 		catch (IndexOutOfBoundsException e) {
@@ -85,49 +83,66 @@ public class SinglyLinkedListTest2 {
 
 	}
 
-
-	/** Test removing an element from the list.
-	 * We've included the example from the concept challenge.
-	 * You will want to add more tests.  */
 	@Test
-	public void testRemove()
-	{
-		int a = list1.remove(0);
-		assertEquals("Remove: check a is correct ", 65, a);
-		assertEquals("Remove: check element 0 is correct ", 21, list1.get(0).intValue());
-		assertEquals("Remove: check size is correct ", 2, list1.size());
+	public void testRemove() {
+		String a = shortList.remove(0);
+		assertEquals("Check a is correct ", "A", a);
+		assertEquals("Check element 0 is correct ", "B", shortList.get(0));
+		assertEquals("Check size is correct ", 2, shortList.size());
 
-		// TODO: Add more tests here
+		try {
+			shortList.remove(3);
+			fail("Check out of bounds");
+		} catch (IndexOutOfBoundsException e) {
+		}
+
+		try {
+			shortList.remove(-1);
+			fail("Check out of bounds");
+		} catch (IndexOutOfBoundsException e) {
+		}
+
+		try {
+			emptyList.remove(0);
+			fail("Check out of bounds");
+		} catch (IndexOutOfBoundsException e) {
+		}
 	}
 
-	/** Test adding an element into the end of the list, specifically
-	 *  public boolean add(E element)
-	 * */
 	@Test
-	public void testAddEnd()
-	{
-		// TODO: implement this test
+	public void testAddEnd() {
+		int oldSize = shortList.size();
+		boolean d = shortList.add("D");
 
+		assertEquals("True must be returned.", true, d);
+		assertEquals("The size must increment.", oldSize + 1, shortList.size());
+		assertEquals("The element must be added at the end.", "D", shortList.get(shortList.size() - 1));
+
+		Object n = emptyList.add(null);
+
+		assertEquals("True must be returned.", true, n);
+		assertEquals("The size must increment.", 1, emptyList.size());
+		assertEquals("The element must be added at the end.", null, emptyList.get(0));
 	}
 
 
-	/** Test the size of the list */
 	@Test
-	public void testSize()
-	{
-		// TODO: implement this test
+	public void testSize() {
+		assertEquals("The size must be correct.", 0, emptyList.size());
+		assertEquals("The size must be correct.", 3, shortList.size());
+		assertEquals("The size must be correct.", 10, longList.size());
+
+		longList.add(101);
+		longList.add(1, 102);
+		assertEquals("The size must increment after adding an element.", 12, longList.size());
+		System.out.println(longList);
+
+		longList.remove(1);
+		assertEquals("The size must decrement after removing an element.", 11, longList.size());
 	}
 
-
-
-	/** Test adding an element into the list at a specified index,
-	 * specifically:
-	 * public void add(int index, E element)
-	 * */
 	@Test
-	public void testAddAtIndex()
-	{
-		// TODO: implement this test
+	public void testAddAtIndex() {
 
 	}
 

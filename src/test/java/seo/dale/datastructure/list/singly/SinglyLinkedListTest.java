@@ -72,21 +72,21 @@ public class SinglyLinkedListTest {
 	public void testInsert() {
 		SinglyLinkedList<String> list = createTestList();
 		try {
-			list.insert(-1, "D");
+			list.add(-1, "D");
 			fail();
 		} catch (IndexOutOfBoundsException e) {
 		}
 
-		list.insert(2, "D");
+		list.add(2, "D");
 		System.out.println(list);
 		assertEquals(4, list.size());
 
-		list.insert(0, "E");
+		list.add(0, "E");
 		System.out.println(list);
 		assertEquals(5, list.size());
 
 		try {
-			list.insert(5, "F");
+			list.add(5, "F");
 			fail();
 		} catch (IndexOutOfBoundsException e) {
 		}
