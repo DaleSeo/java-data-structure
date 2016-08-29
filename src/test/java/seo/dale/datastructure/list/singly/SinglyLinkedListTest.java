@@ -52,15 +52,15 @@ public class SinglyLinkedListTest {
 			fail("Check out of bounds");
 		}
 		catch (IndexOutOfBoundsException e) {
-
 		}
+
 		try {
 			shortList.get(3);
 			fail("Check out of bounds");
 		}
 		catch (IndexOutOfBoundsException e) {
-
 		}
+
 		// test longer list contents
 		for(int i = 0; i< LONG_LIST_LENGTH; i++ ) {
 			assertEquals("Check "+i+ " element", (Integer)i, longList.get(i));
@@ -72,8 +72,8 @@ public class SinglyLinkedListTest {
 			fail("Check out of bounds");
 		}
 		catch (IndexOutOfBoundsException e) {
-
 		}
+
 		try {
 			longList.get(LONG_LIST_LENGTH);
 			fail("Check out of bounds");

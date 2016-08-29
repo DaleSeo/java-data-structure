@@ -8,12 +8,16 @@ import java.util.AbstractList;
  */
 public class SinglyLinkedList<E> extends AbstractList<E> {
 
-	private ListNode<E> head;
 	private int size;
+	private ListNode<E> head;
 
 	public SinglyLinkedList() {
 		head = new ListNode<>(null);
 		size = 0;
+	}
+
+	public int size() {
+		return size;
 	}
 
 	public E get(int index) {
@@ -51,10 +55,6 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 		return element;
 	}
 
-	public int size() {
-		return size;
-	}
-
 	/**
 	 * get the node at the index
 	 */
@@ -68,11 +68,7 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 	}
 
 	private void verifyIndex(int index) {
-		verifyIndex(index, size);
-	}
-
-	private void verifyIndex(int index, int limit) {
-		if (index < 0 || index >= limit) {
+		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException();
 		}
 	}
@@ -80,8 +76,9 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 	@Override
 	public String toString() {
 		if (size < 1) {
-			return "[EMPTY]";
+			return "";
 		}
 		return head.getNext().toString();
 	}
+
 }
