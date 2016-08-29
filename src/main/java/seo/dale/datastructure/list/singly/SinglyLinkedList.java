@@ -26,7 +26,7 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 	}
 
 	public void add(int index, E element ) {
-		verifyIndex(index);
+		verifyIndex(index, size + 1); // the index is the same as the size when adding the element at the end
 
 		ListNode<E> node = head;
 		for (int i = 0; i < index; i++) {
@@ -63,10 +63,16 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 		return curr.getData();
 	}
 
-	public E set(int index, E element)
-	{
-		// TODO: Implement this method
-		return null;
+	public E set(int index, E element) {
+		verifyIndex(index);
+
+		ListNode<E> node = head.getNext();
+		for (int i = 0; i < index; i++) {
+			node = node.getNext();
+		}
+
+		node.setData(element);
+		return element;
 	}
 
 	public int size() {
@@ -74,7 +80,11 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 	}
 
 	private void verifyIndex(int index) {
-		if (index < 0 || index >= size) {
+		verifyIndex(index, size);
+	}
+
+	private void verifyIndex(int index, int limit) {
+		if (index < 0 || index >= limit) {
 			throw new IndexOutOfBoundsException();
 		}
 	}

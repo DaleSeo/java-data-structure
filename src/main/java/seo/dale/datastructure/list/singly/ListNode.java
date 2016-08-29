@@ -22,6 +22,10 @@ public class ListNode<E> {
 		return data;
 	}
 
+	public void setData(E data) {
+		this.data = data;
+	}
+
 	public ListNode getNext() {
 		return next;
 	}
