@@ -3,6 +3,7 @@ package seo.dale.datastructure.list.singly;
 import java.util.AbstractList;
 
 /**
+ * Implementation Tip: private getNode를 구현하여 여러 메소드에서 활
  * @author Dale Seo
  */
 public class SinglyLinkedList<E> extends AbstractList<E> {
@@ -15,68 +16,55 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 		size = 0;
 	}
 
+	public E get(int index) {
+		ListNode<E> node = getNode(index);
+		return node.getData();
+	}
+
 	public boolean add(E element) {
-		ListNode<E> node = head;
-		for (int i = 0; i < size; i++) {
-			node = node.getNext();
-		}
-		node.setNext(new ListNode(element));
-		size++;
+		add(size, element);
 		return true;
 	}
 
 	public void add(int index, E element ) {
-		verifyIndex(index, size + 1); // the index is the same as the size when adding the element at the end
-
-		ListNode<E> node = head;
-		for (int i = 0; i < index; i++) {
-			node = node.getNext();
-		}
-
-		ListNode<E> curr = new ListNode<>(element);
-		curr.setNext(node.getNext());
-		node.setNext(curr);
+		ListNode<E> prevNode = index == 0 ? head : getNode(index - 1);
+		ListNode<E> newNode = new ListNode<>(element);
+		newNode.setNext(prevNode.getNext());
+		prevNode.setNext(newNode);
 		size++;
 	}
 
-	public E get(int index) {
-		verifyIndex(index);
-
-		ListNode<E> node = head.getNext();
-		for (int i = 0; i < index; i++) {
-			node = node.getNext();
-		}
-		return node.getData();
-	}
-
 	public E remove(int index) {
-		verifyIndex(index);
-
-		ListNode<E> prev = head;
-		ListNode<E> curr = head.getNext();
-		for (int i = 0; i < index; i++) {
-			prev = curr;
-			curr = curr.getNext();
+		if (size == 0) {
+			throw new IndexOutOfBoundsException();
 		}
+		ListNode<E> prev = index == 0 ? head : getNode(index - 1);
+		ListNode<E> curr = prev.getNext();
 		prev.setNext(curr.getNext());
 		size--;
 		return curr.getData();
 	}
 
 	public E set(int index, E element) {
-		verifyIndex(index);
-
-		ListNode<E> node = head.getNext();
-		for (int i = 0; i < index; i++) {
-			node = node.getNext();
-		}
-
+		ListNode<E> node = getNode(index);
 		node.setData(element);
 		return element;
 	}
 
 	public int size() {
 		return size;
+	}
+
+	/**
+	 * get the node at the index
+	 */
+	private ListNode<E> getNode(int index) {
+		verifyIndex(index);
+		ListNode<E> node = head.getNext();
+		for (int i = 0; i < index; i++) {
+			node = node.getNext();
+		}
+		return node;
 	}
 
 	private void verifyIndex(int index) {

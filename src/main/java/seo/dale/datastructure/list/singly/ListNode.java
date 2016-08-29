@@ -39,7 +39,7 @@ public class ListNode<E> {
 		StringBuilder builder = new StringBuilder();
 		ListNode node = this;
 		while (node != null) {
-			builder.append(node.data).append("->");
+			builder.append(node.data).append(" ");
 			node = node.next;
 		}
 		builder.setLength(builder.length() - 2);

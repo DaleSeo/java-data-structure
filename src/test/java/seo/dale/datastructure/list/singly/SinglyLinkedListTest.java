@@ -196,13 +196,13 @@ public class SinglyLinkedListTest {
 		shortList.set(1, "BB");
 		assertEquals("The data must be updated.", "BB", shortList.get(1));
 		assertEquals("The data must not change.", oldSize, shortList.size());
-		// System.out.println(shortList);
+//		System.out.println(shortList);
 
 		oldSize = longList.size();
 		longList.set(3, 33);
 		assertEquals("The data must be updated.", 33, longList.get(3).intValue());
 		assertEquals("The data must not change.", oldSize, longList.size());
-		// System.out.println(longList);
+//		System.out.println(longList);
 	}
 
 }
