@@ -32,13 +32,19 @@ public class DoublyLinkedList<E> extends AbstractList<E> {
 
 	@Override
 	public boolean add(E element) {
-		ListNode newNode = new ListNode<>(element);
-		if (tail.prev != null) {
-			tail.prev.next = newNode;
-		}
-		tail.prev = newNode;
-		size++;
+		add(size, element);
 		return true;
+	}
+
+	@Override
+	public void add(int index, E element) {
+		ListNode newNode = new ListNode<>(element);
+		ListNode<E> node = index == size ? tail : getNode(index);
+		node.prev.next = newNode;
+		newNode.prev = node.prev;
+		node.prev = newNode;
+		newNode.next = node;
+		size++;
 	}
 
 	/**

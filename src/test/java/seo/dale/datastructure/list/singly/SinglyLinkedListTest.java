@@ -63,7 +63,7 @@ public class SinglyLinkedListTest {
 
 		// test longer list contents
 		for(int i = 0; i< LONG_LIST_LENGTH; i++ ) {
-			assertEquals("Check "+i+ " element", (Integer)i, longList.get(i));
+			assertEquals("Check " + i + " element", i, longList.get(i).intValue());
 		}
 
 		// test off the end of the longer array
