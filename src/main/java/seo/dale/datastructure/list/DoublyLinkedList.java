@@ -39,11 +39,11 @@ public class DoublyLinkedList<E> extends AbstractList<E> {
 	@Override
 	public void add(int index, E element) {
 		ListNode newNode = new ListNode<>(element);
-		ListNode<E> node = index == size ? tail : getNode(index);
-		node.prev.next = newNode;
-		newNode.prev = node.prev;
-		node.prev = newNode;
-		newNode.next = node;
+		ListNode<E> indexNode = index == size ? tail : getNode(index);
+		newNode.prev = indexNode.prev;
+		newNode.next = indexNode;
+		newNode.prev.next = newNode;
+		newNode.next.prev = newNode;
 		size++;
 	}
 
@@ -92,10 +92,27 @@ public class DoublyLinkedList<E> extends AbstractList<E> {
 
 	@Override
 	public String toString() {
-		if (size < 1) {
-			return "";
+		return toStringForwards();
+	}
+
+	public String toStringForwards() {
+		StringBuilder builder = new StringBuilder();
+		ListNode<E> node = head.next;
+		while (node != null) {
+			builder.append(node).append(" ");
+			node = node.next;
 		}
-		return head.next.toString();
+		return builder.toString();
+	}
+
+	public String toStringBackwords() {
+		StringBuilder builder = new StringBuilder();
+		ListNode<E> node = tail.prev;
+		while (node != null) {
+			builder.append(node).append(" ");
+			node = node.prev;
+		}
+		return builder.toString();
 	}
 
 }

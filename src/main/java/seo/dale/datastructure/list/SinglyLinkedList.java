@@ -38,6 +38,12 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 		size++;
 	}
 
+	public E set(int index, E element) {
+		ListNode<E> node = getNode(index);
+		node.data = element;
+		return element;
+	}
+
 	public E remove(int index) {
 		if (size == 0) {
 			throw new IndexOutOfBoundsException();
@@ -47,12 +53,6 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 		prev.next = curr.next;
 		size--;
 		return curr.data;
-	}
-
-	public E set(int index, E element) {
-		ListNode<E> node = getNode(index);
-		node.data = element;
-		return element;
 	}
 
 	/**
@@ -75,10 +75,13 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 
 	@Override
 	public String toString() {
-		if (size < 1) {
-			return "";
+		StringBuilder builder = new StringBuilder();
+		ListNode<E> node = head.next;
+		while (node != null) {
+			builder.append(node).append(" ");
+			node = node.next;
 		}
-		return head.next.toString();
+		return builder.toString();
 	}
 
 }
