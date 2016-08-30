@@ -1,4 +1,4 @@
-package seo.dale.datastructure.list.singly;
+package seo.dale.datastructure.list;
 
 import java.util.AbstractList;
 
@@ -22,7 +22,7 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 
 	public E get(int index) {
 		ListNode<E> node = getNode(index);
-		return node.getData();
+		return node.data;
 	}
 
 	public boolean add(E element) {
@@ -33,8 +33,8 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 	public void add(int index, E element ) {
 		ListNode<E> prevNode = index == 0 ? head : getNode(index - 1);
 		ListNode<E> newNode = new ListNode<>(element);
-		newNode.setNext(prevNode.getNext());
-		prevNode.setNext(newNode);
+		newNode.next = prevNode.next;
+		prevNode.next = newNode;
 		size++;
 	}
 
@@ -43,15 +43,15 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 			throw new IndexOutOfBoundsException();
 		}
 		ListNode<E> prev = index == 0 ? head : getNode(index - 1);
-		ListNode<E> curr = prev.getNext();
-		prev.setNext(curr.getNext());
+		ListNode<E> curr = prev.next;
+		prev.next = curr.next;
 		size--;
-		return curr.getData();
+		return curr.data;
 	}
 
 	public E set(int index, E element) {
 		ListNode<E> node = getNode(index);
-		node.setData(element);
+		node.data = element;
 		return element;
 	}
 
@@ -60,9 +60,9 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 	 */
 	private ListNode<E> getNode(int index) {
 		verifyIndex(index);
-		ListNode<E> node = head.getNext();
+		ListNode<E> node = head.next;
 		for (int i = 0; i < index; i++) {
-			node = node.getNext();
+			node = node.next;
 		}
 		return node;
 	}
@@ -78,7 +78,7 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 		if (size < 1) {
 			return "";
 		}
-		return head.getNext().toString();
+		return head.next.toString();
 	}
 
 }

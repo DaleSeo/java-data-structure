@@ -1,4 +1,4 @@
-package seo.dale.datastructure.list.doubly;
+package seo.dale.datastructure.list;
 
 import java.util.AbstractList;
 
@@ -45,6 +45,22 @@ public class DoublyLinkedList<E> extends AbstractList<E> {
 		node.prev = newNode;
 		newNode.next = node;
 		size++;
+	}
+
+	@Override
+	public E set(int index, E element) {
+		ListNode<E> node = getNode(index);
+		node.data = element;
+		return element;
+	}
+
+	@Override
+	public E remove(int index) {
+		ListNode<E> node = getNode(index);
+		node.prev.next = node.next;
+		node.next.prev = node.prev;
+		size--;
+		return node.data;
 	}
 
 	/**

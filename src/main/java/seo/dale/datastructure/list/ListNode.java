@@ -1,4 +1,4 @@
-package seo.dale.datastructure.list.doubly;
+package seo.dale.datastructure.list;
 
 /**
  * @author Dale Seo
@@ -9,7 +9,7 @@ public class ListNode<E> {
 	ListNode next;
 	ListNode prev;
 
-	public ListNode(E data) {
+	ListNode(E data) {
 		this.data = data;
 	}
 

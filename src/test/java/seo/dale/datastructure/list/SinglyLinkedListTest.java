@@ -1,4 +1,4 @@
-package seo.dale.datastructure.list.doubly;
+package seo.dale.datastructure.list;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,36 +9,28 @@ import static org.junit.Assert.fail;
 /**
  * @author Dale Seo
  */
-public class DoublyLinkedListTest {
+public class SinglyLinkedListTest {
 
 	private static final int LONG_LIST_LENGTH = 10;
 
-	private DoublyLinkedList<Object> emptyList;
-	private DoublyLinkedList<String> shortList;
-	private DoublyLinkedList<Integer> longList;
+	private SinglyLinkedList<Object> emptyList;
+	private SinglyLinkedList<String> shortList;
+	private SinglyLinkedList<Integer> longList;
 
 	@Before
 	public void setUp() throws Exception {
-		emptyList = new DoublyLinkedList<>();
-		System.out.println(emptyList);
+		emptyList = new SinglyLinkedList<>();
 
-		shortList = new DoublyLinkedList<>();
+		shortList = new SinglyLinkedList<>();
 		shortList.add("A");
 		shortList.add("B");
 		shortList.add("C");
-		System.out.println(shortList);
 
-		longList = new DoublyLinkedList<>();
+		longList = new SinglyLinkedList<>();
 		for (int i = 0; i < LONG_LIST_LENGTH; i++)
 		{
 			longList.add(i);
 		}
-		System.out.println(longList);
-	}
-
-	@Test
-	public void testSize() {
-
 	}
 
 	@Test
@@ -88,6 +80,33 @@ public class DoublyLinkedListTest {
 		}
 		catch (IndexOutOfBoundsException e) {
 		}
+
+	}
+
+	@Test
+	public void testRemove() {
+		String a = shortList.remove(0);
+		assertEquals("Check a is correct ", "A", a);
+		assertEquals("Check element 0 is correct ", "B", shortList.get(0));
+		assertEquals("Check size is correct ", 2, shortList.size());
+
+		try {
+			shortList.remove(3);
+			fail("Check out of bounds");
+		} catch (IndexOutOfBoundsException e) {
+		}
+
+		try {
+			shortList.remove(-1);
+			fail("Check out of bounds");
+		} catch (IndexOutOfBoundsException e) {
+		}
+
+		try {
+			emptyList.remove(0);
+			fail("Check out of bounds");
+		} catch (IndexOutOfBoundsException e) {
+		}
 	}
 
 	@Test
@@ -104,6 +123,21 @@ public class DoublyLinkedListTest {
 		assertEquals("True must be returned.", true, n);
 		assertEquals("The size must increment.", 1, emptyList.size());
 		assertEquals("The element must be added at the end.", null, emptyList.get(0));
+	}
+
+	@Test
+	public void testSize() {
+		assertEquals("The size must be correct.", 0, emptyList.size());
+		assertEquals("The size must be correct.", 3, shortList.size());
+		assertEquals("The size must be correct.", 10, longList.size());
+
+		longList.add(101);
+		longList.add(1, 102);
+		assertEquals("The size must increment after adding an element.", 12, longList.size());
+		System.out.println(longList);
+
+		longList.remove(1);
+		assertEquals("The size must decrement after removing an element.", 11, longList.size());
 	}
 
 	@Test
@@ -137,5 +171,37 @@ public class DoublyLinkedListTest {
 	}
 
 
+	@Test
+	public void testSet() {
+		try {
+			emptyList.set(0, null);
+			fail("Check out of bounds");
+		} catch (IndexOutOfBoundsException e) {
+		}
+
+		try {
+			shortList.set(3, "D");
+			fail("Check out of bounds");
+		} catch (IndexOutOfBoundsException e) {
+		}
+
+		try {
+			shortList.add(-1, "Z");
+			fail("Check out of bounds");
+		} catch (IndexOutOfBoundsException e) {
+		}
+
+		int oldSize = shortList.size();
+		shortList.set(1, "BB");
+		assertEquals("The data must be updated.", "BB", shortList.get(1));
+		assertEquals("The data must not change.", oldSize, shortList.size());
+//		System.out.println(shortList);
+
+		oldSize = longList.size();
+		longList.set(3, 33);
+		assertEquals("The data must be updated.", 33, longList.get(3).intValue());
+		assertEquals("The data must not change.", oldSize, longList.size());
+//		System.out.println(longList);
+	}
 
 }
